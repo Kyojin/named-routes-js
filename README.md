@@ -17,7 +17,7 @@ A `node.js` module for naming HTTP routes. Can be used with the [express.js](htt
 ## Install
 
 ```
-npm install named-routes
+npm install named-routes-js
 ```
 
 ## Features
@@ -28,7 +28,7 @@ npm install named-routes
 var express = require('express');
 var app = express();
 
-var Router = require('named-routes');
+var Router = require('named-routes-js');
 var router = new Router();
 router.extendExpress(app);
 router.registerAppHelpers(app);
@@ -65,7 +65,7 @@ app.route('/admin/user/:id', 'admin.user.edit', {
 #### As a standalone
 
 ```js
-var Router = require('named-routes')();
+var Router = require('named-routes-js')();
 var router = new Router();
 
 router.add('get', '/admin/user/:id', function() {
