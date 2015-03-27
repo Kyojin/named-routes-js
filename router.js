@@ -47,9 +47,9 @@ Router.prototype.match = function (req) {
     // guarantee array of parameters
     outcome = outcome === true ? [] : outcome;
     return {
-      route:    route,
-      callbacks:this.callbacksByPathAndMethod[route.path][method],
-      params:   outcome
+      route:     route,
+      callbacks: this.callbacksByPathAndMethod[route.path][method],
+      params:    outcome
     }
   }
   return false;
@@ -64,8 +64,8 @@ Router.prototype.match = function (req) {
  */
 Router.prototype.add = function (method, path, callbacks, options) {
   function flatten(arr, ret) {
-    var ret = ret || []
-      , len = arr.length;
+    var ret = ret || [],
+        len = arr.length;
     for (var i = 0; i < len; ++i) {
       if (Array.isArray(arr[i])) {
         flatten(arr[i], ret);
@@ -210,25 +210,21 @@ Router.prototype.dispatch = function (req, res, next) {
       paramValue = paramName && req.params[paramName];
       paramCallbacks = paramName && callbacksPerParameter[paramName];
 
-      try {
-        if ('route' == err) {
-          // Specific case where the error means `next route please`? Strange, anyways this is inherited by express.js
-          nextRoute();
-        } else if (err) {
-          // Handle errors. Assumption is made that there's a global error handler or a specific route callback that handle the errors
-          nextRouteMiddleware(err);
-        } else if (paramCallbacks) {
-          // No errors so just run through the parameter callbacks if there's any
-          nextCallbackForParam();
-        } else if (paramName) {
-          // No callbacks
-          processNextParameter();
-        } else {
-          // Parameter callbacks ended, start running route middleware callbacks
-          nextRouteMiddleware();
-        }
-      } catch (err) {
-        processNextParameter(err);
+      if ('route' == err) {
+        // Specific case where the error means `next route please`? Strange, anyways this is inherited by express.js
+        nextRoute();
+      } else if (err) {
+        // Handle errors. Assumption is made that there's a global error handler or a specific route callback that handle the errors
+        nextRouteMiddleware(err);
+      } else if (paramCallbacks) {
+        // No errors so just run through the parameter callbacks if there's any
+        nextCallbackForParam();
+      } else if (paramName) {
+        // No callbacks
+        processNextParameter();
+      } else {
+        // Parameter callbacks ended, start running route middleware callbacks
+        nextRouteMiddleware();
       }
     }
 
@@ -242,22 +238,19 @@ Router.prototype.dispatch = function (req, res, next) {
     // invoke route callbacks
     function nextRouteMiddleware(err) {
       var callback = match.callbacks[i++];
-      try {
-        if ('route' == err) {
-          // Specific case where the error means `next route please`? Strange.. anyways this is inherited by express.js
-          nextRoute();
-        } else if (err && callback) {
-          // Handle errors. If the current callback doesn't support error handling try next one
-          if (callback.length < 4) return nextRouteMiddleware(err);
-          callback(err, req, res, nextRouteMiddleware);
-        } else if (callback) {
-          callback(req, res, nextRouteMiddleware);
-        } else {
-          // No more callbacks
-          nextRoute(err);
-        }
-      } catch (err) {
-        nextRouteMiddleware(err);
+
+      if ('route' == err) {
+        // Specific case where the error means `next route please`? Strange.. anyways this is inherited by express.js
+        nextRoute();
+      } else if (err && callback) {
+        // Handle errors. If the current callback doesn't support error handling try next one
+        if (callback.length < 4) return nextRouteMiddleware(err);
+        callback(err, req, res, nextRouteMiddleware);
+      } else if (callback) {
+        callback(req, res, nextRouteMiddleware);
+      } else {
+        // No more callbacks
+        nextRoute(err);
       }
     }
   }
