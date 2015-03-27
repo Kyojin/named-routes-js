@@ -188,7 +188,7 @@ Router.prototype.dispatch = function (req, res, next) {
   function nextRoute(err) {
     // match route
     var match = self.match(req);
-    if (match == false) return next(err);
+    if (match == false && typeof next === 'function') return next(err);
     req.route = match.route;
     req.params = match.params;
 
