@@ -1,28 +1,35 @@
 {
-  "name": "named-routes",
-  "description": "HTTP request router with named reversable routes",
-  "version": "1.1.4",
+  "name": "named-routes-js",
+  "description": "HTTP request router with named reversible routes",
+  "version": "1.1.5",
   "author": {
+    "name": "Oussama Ezzayer",
+    "email": "kyojinkun@gmail.com",
+    "url": "http://about.oussamaezzayer.me"
+  },
+  "contributors": [{
     "name": "Andreas Lubbe",
     "email": "npm@lubbe.org"
-  },
+  }, {
+    "name": "Anton Stoychev",
+    "email": "anton@napopa.com"
+  }],
   "main": "./router.js",
   "keywords": [
     "named",
     "routes",
-    "i18n",
     "router",
-    "reversable",
+    "parameters",
+    "reversible",
     "express",
     "web"
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/alubbe/named-routes"
+    "url": "git://github.com/Kyojin/named-routes-js"
   },
-  "readme": "Named routes for node.js. Works with express and independently",
   "bugs": {
-    "url": "https://github.com/alubbe/named-routes/issues"
+    "url": "https://github.com/Kyojin/named-routes-js/issues"
   },
   "scripts": {
     "test": "mocha test"
