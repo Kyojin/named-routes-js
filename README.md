@@ -1,6 +1,6 @@
 # Named Routes for Node.js
 
-A `node.js` module for naming HTTP routes. Can be used with the [express.js](http://expressjs.com/) framework or independently as standalone. It is based on the amazing work of antitoxic's [node-reversable-router](https://github.com/web-napopa/node-reversable-router).
+A `node.js` module for naming HTTP routes. Can be used with the [express.js](http://expressjs.com/) framework or independently as standalone. It is based on the amazing work of antitoxic's [node-reversable-router](https://github.com/web-napopa/node-reversable-router) and alubbe's [named-routes](https://github.com/alubbe/named-routes).
 
 **Feature overview**:
  - Support for named routes
@@ -208,22 +208,10 @@ Analogous in order to generate the same url:
 url('admin.user.edit', {id:2, _masked: ['any','thing'], sort: 'name', 'order': 'desc'})
 ```
 
-
-## Future development planned
-
-### Publish
- - Organise and publish tests
-
-### Implement
- - Query based routing and generation
-
-### Investigate
-**meta-routing** Middleware depending on media? mobile, desktop, agent
-
 ## License
 (The MIT License)
 
-Copyright (c) 2014 Andreas Lubbe <npm@lubbe.org>
+Copyright (c) 2015 Oussama Ezzayer <kyojinkun@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the
 rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
